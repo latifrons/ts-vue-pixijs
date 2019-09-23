@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tsvuebootstrap
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tsvuebootstrap
+    spec:
+      containers:
+        - name: tsvuebootstrap
+          image: xxx:5000/tsvuebootstrap:latest
+          ports:
+            - name: http
+              containerPort: 80
+  -------
+apiVersion: v1
+kind: Service
+metadata:
+  name: tsvuebootstrap
+spec:
+  selector:
+    app: tsvuebootstrap
+  type: NodePort
+  ports:
+    - name: query
+      port: 80
+      nodePort: 30021
